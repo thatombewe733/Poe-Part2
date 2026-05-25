@@ -16,9 +16,7 @@ public class MessageSenderTest {
     public MessageSenderTest() {
     }
 
-    
-
-    /**
+      /**
      * Test of checkMessageID method, of class MessageSender.
      */
     @Test

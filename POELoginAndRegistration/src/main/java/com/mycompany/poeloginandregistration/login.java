@@ -11,6 +11,10 @@ import java.util.Scanner;
  * @author thato
  */
 public class login {
+    public static void main(String[]args)
+    {
+        loginUser();
+    }
      static void  loginUser(){
             Scanner input = new Scanner(System.in);
             boolean login =true;

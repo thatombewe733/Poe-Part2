@@ -17,7 +17,7 @@ public class MessageSender {
     private String recipient;
     private String messageHash;
     private String messageID;
-    private int numMessagesSent;
+    private int numofMessagesSent;
     private HashMap<String,String>  storedMessages = new HashMap<>();
     
     
@@ -25,7 +25,7 @@ public class MessageSender {
    public MessageSender(String recipient, String message, int numSent){
        this.recipient = recipient;
        this.message = message;
-       this.numMessagesSent = numSent;
+       this.numofMessagesSent = numSent;
        this.messageID = generateMessageID();
    }
           
@@ -73,22 +73,22 @@ public class MessageSender {
             if(message == null)
                 return "Please enter a message of less than 250 characters";
             if(message.length()>250){
-                int extra = message.length()-250;
-                return "Message exceeds 250 characters by " + extra + "; please reduce the length of the message.";
+                int more = message.length()-250;
+                return "Message exceeds 250 characters by " + more + "; please reduce the length of the message.";
             }
             return "Message sent";
             }
         //Creating a message hash
         public String createMessageHash() {
             if(message == null || message.trim().isEmpty()) {
-                return messageID.substring(0 , 2) + " " + numMessagesSent + " ";
+                return messageID.substring(0 , 2) + " " + numofMessagesSent + " ";
             }
             String[] words = message.trim().split("\\s+");
             String lastWord = words[words.length - 1];
             String firstWord = words[0]; 
             lastWord = lastWord.replaceAll("[^a-zA-Z0-9]", " ");
             firstWord = firstWord.replaceAll("[^a-zA-Z0-9]", " ");
-            messageHash =(messageID.substring(0, 2) + ":" + numMessagesSent + ":" + firstWord + lastWord).toUpperCase();
+            messageHash =(messageID.substring(0, 2) + ":" + numofMessagesSent + ":" + firstWord + lastWord).toUpperCase();
             return messageHash;
             }
         //sending messages
@@ -100,9 +100,9 @@ public class MessageSender {
             System.out.println("3)Store the message to send later");
             System.out.println("Choose your choice:");
             String choice = myMessage.nextLine();
-            
+             
             if (choice.equals("1")){
-                numMessagesSent++;
+                numofMessagesSent++;
                 return "Message successfully sent";
             }
             else if(choice.equals("2")){
@@ -149,9 +149,9 @@ public class MessageSender {
         }
 
         
-        //Returning total messages
+        //Returning total messages sent
         public int returnTotalMessages() {
-            return numMessagesSent;
+            return numofMessagesSent;
         }
         //using Getters to get the recipient,the message, the messageHash, number of messages sent, messageID
         public String getMessage(){
@@ -164,7 +164,7 @@ public class MessageSender {
             return recipient;
         }
         public int getNumMesaagesSent(){
-            return numMessagesSent;
+            return numofMessagesSent;
         }
         public String getMessageID(){
             return messageID;

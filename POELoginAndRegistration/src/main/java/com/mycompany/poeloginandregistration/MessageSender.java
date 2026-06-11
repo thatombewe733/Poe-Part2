@@ -59,13 +59,13 @@ public class MessageSender {
     }
     //Check for recipient cellphone number
     public String checkRecipientCell() {
-        if(recipient.length() <12 && recipient.startsWith("+"))
+        if(recipient.length() <=13 && recipient.startsWith("+"))
         {
-            return "Cellphone number is successfully captured.";
+            return "Cell phone number successfully captured.";
         }
         else
         {
-            return "Cellphone number is incorrectly formated or does not conatin an international code.Please re-enter your phone number: ";
+            return "Cell phone number is incorrectly formated or does not conatin an international code.Please re-enter your phone number: ";
            
         }
     }
@@ -92,21 +92,24 @@ public class MessageSender {
             return messageHash;
             }
         //sending messages
-        public String sendMessage() {
-             Scanner myMessage = new Scanner(System.in);
+        public String sendMessage(Scanner scanner) {
+        
             //Prompting the use to enter their choice
             System.out.println("1)Send a Message");
             System.out.println("2)Disregard message");
             System.out.println("3)Store the message to send later");
             System.out.println("Choose your choice:");
-            String choice = myMessage.nextLine();
-             
+            String choice = scanner.nextLine().trim();
+            
+            return sendMessage(choice);
+        }
+        public String sendMessage(String choice){     
             if (choice.equals("1")){
                 numofMessagesSent++;
                 return "Message successfully sent";
             }
             else if(choice.equals("2")){
-                return"Press 0 to delete your message.";
+                return"Press 0 to delete the message.";
             }
             else if(choice.equals("3")){
                 storedMessages.put(messageID,message);
@@ -129,8 +132,8 @@ public class MessageSender {
                         "message: " + message + " " + 
                         "messageHash: " + messageHash + " ";
                 try {
-                    FileWriter file = new FileWriter("stored_message.json");
-                    file.write(jsonMessage);
+                    FileWriter file = new FileWriter("stored_message.json",true);
+                    file.write(jsonMessage + " ");
                     file.flush();
                     file.close();
                     System.out.println("Message sucessfully stored");

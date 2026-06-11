@@ -21,16 +21,21 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Find pom.xml location
+        run: find . -name "pom.xml" | head -5
+
       - name: Build with Maven
         run: mvn clean compile --no-transfer-progress
+        working-directory: POELoginAndRegistration
 
       - name: Run tests with Maven
         run: mvn test --no-transfer-progress
+        working-directory: POELoginAndRegistration
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: target/surefire-reports/
+          path: POELoginAndRegistration/target/surefire-reports/
           retention-days: 7
